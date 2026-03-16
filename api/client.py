@@ -1,10 +1,11 @@
 import requests
 
-BASE_URL = "https://reqres.in/api"  # Ingyenes teszt API
+BASE_URL = "https://reqres.in/api"
 
 class APIClient:
-    def get_users(self):
-        return requests.get(f"{BASE_URL}/users")
+    def get_users(self, page=1):
+        # page paraméter hozzáadása
+        return requests.get(f"{BASE_URL}/users", params={"page": page})
 
     def create_user(self, data):
         return requests.post(f"{BASE_URL}/users", json=data)

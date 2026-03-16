@@ -16,6 +16,11 @@ user_schema = {
 }
 
 def test_get_users_contract():
-    response = client.get_users()
-    data = response.json()["data"][0]
+    response = client.get_users(page=1)  # page=1 hozzáadva
+    assert response.status_code == 200, f"Unexpected status code: {response.status_code}"
+    
+    json_response = response.json()
+    assert "data" in json_response, "Missing 'data' in response"
+    
+    data = json_response["data"][0]
     validate(instance=data, schema=user_schema)
